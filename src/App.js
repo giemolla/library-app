@@ -45,6 +45,7 @@ class LibraryApp extends Component {
       copy: true
     };
 
+    this.handleAdd = this.handleAdd.bind(this);
     this.addBook = this.addBook.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.deleteBook = this.deleteBook.bind(this);
@@ -85,7 +86,7 @@ class LibraryApp extends Component {
     );
   }
 
-  addBook(data) {
+  handleAdd(data) {
     const url = 'http://localhost:3001/books';
     const { title, author, genre, year, status, description, link, rating } = data;
     const newBook = {
@@ -112,10 +113,16 @@ class LibraryApp extends Component {
       body: JSON.stringify(newBook)
     })
     .then(res => res.json())
-    .then(res => {
+    .then(newBook => {
         console.log("Dodana ksiązka: ");
-        console.log(res);
-        this.fetchBooks();
+        console.log(newBook);
+        this.addBook(newBook);
+    });
+  }
+
+  addBook(data) {
+    this.setState({
+      books: this.state.books.concat(data)
     });
   }
 
@@ -174,7 +181,7 @@ class LibraryApp extends Component {
             </div>
             {bookNodes}
         </div>
-        <BookForm handleSubmit={this.addBook}/>
+        <BookForm handleSubmit={this.handleAdd}/>
       </div>
     );
   }

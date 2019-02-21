@@ -1,0 +1,61 @@
+.table-of-books {
+    width: 80%;
+    margin: 0 auto;
+    font-size: 0.8rem;
+}
+
+.table-row {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    border-bottom: 1px solid #e7e7e7;
+}
+
+.table-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    flex: 2;
+    height: 120px;
+}
+
+.table-row:first-of-type {
+    border-bottom: none;
+}
+
+.table-cell.author-title-cell {
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 3;
+}
+
+.table-cell.genre {
+    justify-content: flex-start;
+}
+
+.table-cell.delete-book {
+    flex: 1;
+    color: #e7e7e7;
+}
+
+.table-cell.delete-book i:hover {
+    color: #777;
+    cursor: pointer;
+}
+
+.table-row.header-row .table-cell {
+    height: 60px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+img {
+    max-width: 80%;
+    max-height: 80%;
+}
+
+.title {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}

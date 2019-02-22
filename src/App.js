@@ -1,7 +1,9 @@
 // api Pucka
 // https://books-api-react-fun.herokuapp.com/api/v1/books
 import React, { Component } from 'react';
+import BookList from './Components/BookList';
 import BookForm from './Components/BookForm';
+import BookDetails from './Components/BookDetails';
 import './App.css';
 
 // const SaveButton = (props) => {
@@ -16,39 +18,20 @@ import './App.css';
 //   );
 // };
 
-const Book = (props) => {
-  return(
-    <div className="table-row">
-      <div className="table-cell img-cell">
-        <img src={props.src} alt='book-cover'/>
-      </div>
-      <div className="table-cell author-title-cell">
-        <div className="title">{props.title}</div>
-        <div>{props.author}</div>
-      </div>
-      <div className="table-cell genre">{props.genre}</div>
-      <div className="table-cell">{props.year}</div>
-      <div className="table-cell">{props.status}</div>
-      <div className="table-cell">{props.rating}</div>
-      <div className="table-cell delete-book">
-        <i className="fas fa-trash-alt" onClick={() => props.handleClick(props.id)}></i>
-      </div>
-    </div>
-  );
-};
-
 class LibraryApp extends Component {
   constructor(props) {
     super(props);
     this.state = {
       books: [],
-      copy: true
+      copy: true,
+      chosenBook: null
     };
 
     this.handleAdd = this.handleAdd.bind(this);
     this.addBook = this.addBook.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.deleteBook = this.deleteBook.bind(this);
+    this.handleShowBookDetails = this.handleShowBookDetails.bind(this);
   }
 
   componentWillMount() {
@@ -62,28 +45,6 @@ class LibraryApp extends Component {
       .then(data => {
         this.setState({ books: data });
       });
-  }
-
-  getBooks() {
-    return(
-      this.state.books.map(book => {
-        const { id, image, title, author, rating, status='przeczytana', year=2000, genre } = book;
-        return(
-          <Book
-            id={id}
-            key={id}
-            src={image}
-            title={title}
-            author={author}
-            status={status}
-            rating={rating}
-            year={year}
-            genre={genre}
-            handleClick={this.handleDelete}
-          />
-        );
-      })
-    );
   }
 
   handleAdd(data) {
@@ -141,9 +102,31 @@ class LibraryApp extends Component {
 
   deleteBook(id) {
     let refreshedBooks = this.state.books.filter(book => book.id !== id);
+    if (this.state.chosenBook.id === id) {
+      this.setState({ chosenBook: null });
+    }
     this.setState({
       books: refreshedBooks
     });
+  }
+
+  handleShowBookDetails(id) {
+    const chosenBook = this.state.books.find(book => book.id === id);
+    this.setState({ chosenBook });
+  }
+
+  showBookDetails(book) {
+    const { image, title, author, rating, status='przeczytana', year=2000, genre, description } = book;
+    return(
+      <BookDetails 
+        title={title}
+        author={author}
+        src={image}
+        description={description}
+        genre={genre}
+        year={year}
+        status={status}/>
+    );
   }
 
   saveCopy() {
@@ -161,26 +144,21 @@ class LibraryApp extends Component {
   }
 
   render() {
-    const bookNodes = this.getBooks();
+    let bookDetails;
+    if(this.state.chosenBook) {
+      bookDetails = this.showBookDetails(this.state.chosenBook);
+    }
+
     return(
       <div>
         {/* <SaveButton
           copy={this.state.copy}
           handleClick={this.saveCopy.bind(this)}
         /> */}
-        <div className='table-of-books'>
-          <h1 className="table-row table-header">MY LIBRARY</h1>
-            <div className="table-row header-row">
-              <div className="table-cell img-table-cell"></div>
-              <div className="table-cell author-title-cell">Tytuł, autor</div>
-              <div className="table-cell">Gatunek</div>
-              <div className="table-cell">Pierwsze wydanie</div>
-              <div className="table-cell">Status</div>
-              <div className="table-cell">Moja ocena</div>
-              <div className="table-cell delete-book"></div>
-            </div>
-            {bookNodes}
-        </div>
+        <BookList books={this.state.books}
+                  handleDelete={this.handleDelete}
+                  handleShowBookDetails={this.handleShowBookDetails}/>
+        {bookDetails}
         <BookForm handleSubmit={this.handleAdd}/>
       </div>
     );

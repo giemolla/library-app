@@ -152,7 +152,7 @@ class BookForm extends Component {
         }
         return(
             <form onSubmit={this.handleSubmit.bind(this)}>
-                <h2>NOWA KSIAŻKA</h2>
+                <h2 className="form-header">NOWA KSIAŻKA</h2>
             
                 {formFields}
 

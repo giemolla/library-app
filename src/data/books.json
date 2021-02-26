@@ -390,7 +390,7 @@
         "title": "Hobbit czyli Tam i z powrotem",
         "author": "J.R.R. Tolkien",
         "genre": "Fantasy",
-        "image": "https://emp-scs.img-osdw.pl/img-p/1/kipzwl/374e5dbb/std/2bc-452/77813777o.jpg",
+        "image": "https://dziupla.sowa.pl/f/ggcxjvbvy1ng2.jpg",
         "thumbnail": "",
         "quotations": [],
         "quotationImages": [],
@@ -402,6 +402,7 @@
       {
         "title": "Upadek",
         "author": "Albert Camus",
+        "authorImage": "https://d24fkeqntp1r7r.cloudfront.net/wp-content/uploads/2019/03/25203058/DxIUC7uX0AIlkJz.jpg",
         "genre": "Literatura piękna",
         "image": "http://s.lubimyczytac.pl/upload/books/228000/228318/297936-352x500.jpg",
         "thumbnail": "",
@@ -416,8 +417,10 @@
       {
         "title": "Harda",
         "author": "Elżbieta Cherezińska",
+        "authorImage": "https://cherezinska.pl/wp-content/uploads/2016/09/Cherezinska_Krolowa-004.jpg",
         "genre": "Powieść historyczna",
         "image": "http://s.lubimyczytac.pl/upload/books/305000/305512/532366-352x500.jpg",
+        "imageForHero": "https://pofikasz.pl/wp-content/uploads/2017/09/swietoslawa.jpg",
         "thumbnail": "",
         "quotations": [],
         "quotationImages": [],

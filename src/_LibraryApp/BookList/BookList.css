@@ -1,0 +1,64 @@
+.book-card {
+  display: flex;
+  width: 70%;
+  margin: 2.5rem auto;
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+/* .book-card, .book-card * {
+    border: 1px solid green;
+} */
+
+.book-card-left {
+  flex: 1;
+}
+
+.book-card-right {
+  flex: 3;
+}
+
+.book-card-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.book-cover,
+.user-interactions {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.book-cover {
+  justify-content: flex-end;
+}
+
+.small-btn {
+  font-size: 0.7rem;
+  width: initial;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #e7e7e7;
+  color: initial;
+  margin-top: 5px;
+}
+
+.small-btn:hover {
+  font-weight: initial;
+  color: white;
+  background-color: black;
+}
+
+.book-card .star-rating {
+  width: 60%;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.star-rating label {
+  font-family: inherit;
+  font-size: 0.8rem;
+  margin: 5px auto;
+}

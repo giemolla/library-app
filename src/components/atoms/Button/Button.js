@@ -9,6 +9,7 @@ const Button = styled.button`
   border: none;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
   outline: none;
+  border-radius: ${({ theme }) => theme.smallRounding};
 
   ${({ icon }) =>
     icon &&
@@ -20,13 +21,13 @@ const Button = styled.button`
   ${({ edit }) =>
     edit &&
     css`
-      background-color: #5cb85c;
+      background-color: ${({ theme }) => theme.azure};
     `}
 
   ${({ remove }) =>
     remove &&
     css`
-      background-color: #d9534f;
+      background-color: ${({ theme }) => theme.red};
     `}
 `;
 

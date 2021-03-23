@@ -8,8 +8,8 @@ import StarRating from '../../molecules/StarRating/StarRating';
 
 const StyledWrapper = styled.div`
   width: 90%;
-  margin: 0 auto;
-  border-radius: 10px;
+  margin: 60px auto;
+  border-radius: ${({ theme }) => theme.bigRounding};
   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
 `;
 
@@ -25,7 +25,7 @@ const StyledListElement = styled.li`
   align-items: center;
   align-content: space-between;
   margin: 20px;
-  border-bottom: 1px solid ${({ theme }) => theme.navyblue};
+  border-bottom: 1px solid ${({ theme }) => theme.yellow};
 
   &:last-of-type {
     border-bottom: none;

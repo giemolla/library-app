@@ -48,7 +48,7 @@ class LibraryApp extends Component {
                   !this.state.admin ? (
                     <LoginPage {...props} handleLogin={this.handleLogin} />
                   ) : (
-                    <Redirect to={routes.adminPanel} />
+                    <Redirect to={routes.adminBooks} />
                   )
                 }
               />
@@ -59,12 +59,12 @@ class LibraryApp extends Component {
                   !this.state.admin ? (
                     <Redirect to={routes.adminLogin} />
                   ) : (
-                    <Redirect to={routes.adminPanel} />
+                    <Redirect to={routes.adminBooks} />
                   )
                 }
               />
               <Route
-                path={routes.adminPanel}
+                path={routes.adminBooks}
                 component={() =>
                   !this.state.admin ? (
                     <Redirect to={routes.adminLogin} />

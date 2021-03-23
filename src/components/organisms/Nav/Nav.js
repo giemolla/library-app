@@ -12,7 +12,6 @@ const StyledContainer = styled.nav`
   top: 0;
   display: flex;
   width: 100%;
-  /* background-color: ${({ theme }) => theme.navyblue}; */
   background-color: black;
   justify-content: center;
   align-items: center;

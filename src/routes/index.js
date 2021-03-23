@@ -6,5 +6,8 @@ export const routes = {
   bookdetails: "/books/:id",
   adminLogin: "/admin/login",
   admin: "/admin",
-  adminPanel: "/admin/panel"
+  adminBooks: "/admin/books",
+  adminAddBook: "/admin/books/add",
+  adminAbout: "/admin/books/about",
+  adminContact: "/admin/books/contact"
 };

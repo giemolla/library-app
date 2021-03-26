@@ -15,14 +15,17 @@ const StarIcon = styled.i`
   }
 `;
 
-const Star = props => (
-  <StarIcon
-    id={props.id}
-    className={props.className}
-    onMouseOver={props.handleRating}
-    onMouseLeave={props.handleRating}
-    onClick={props.handleRating}
-  ></StarIcon>
-);
+const Star = props => {
+  const { id, className, handleRating } = props;
+  return (
+    <StarIcon
+      id={id}
+      className={className}
+      onMouseOver={handleRating}
+      onMouseLeave={handleRating}
+      onClick={handleRating}
+    ></StarIcon>
+  );
+};
 
 export default Star;

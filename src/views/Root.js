@@ -28,7 +28,6 @@ class LibraryApp extends Component {
   handleLogin(login, password) {
     if (login === admin.login && password === admin.password) {
       this.setState({ admin: true });
-      console.log(this.state.admin);
     }
   }
 

@@ -7,7 +7,6 @@ import BookForm from '../components/organisms/BookForm/BookForm';
 import About from '../templates/About';
 import Contact from '../templates/Contact';
 
-import * as bookService from '../services/bookService';
 import { BooksContext } from '../context';
 
 const StyledWrapper = styled.div`

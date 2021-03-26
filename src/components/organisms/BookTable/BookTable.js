@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import styled, { css } from "styled-components";
 import { BooksContext } from '../../../context';
-import { getAllBooks } from '../../../services/bookService';
 
 import Button from '../../atoms/Button/Button';
 import ButtonGroup from '../../molecules/ButtonGroup/ButtonGroup';

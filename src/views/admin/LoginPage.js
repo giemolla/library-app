@@ -1,5 +1,5 @@
 import React from "react";
-import LoginForm from "../components/organisms/LoginForm/LoginForm";
+import LoginForm from "../../components/organisms/LoginForm/LoginForm";
 
 const LoginPage = props => <LoginForm handleLogin={props.handleLogin} />;
 

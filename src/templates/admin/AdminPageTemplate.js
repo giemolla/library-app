@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import { Route, Link } from 'react-router-dom';
-import { routes } from '../routes';
+import { routes } from '../../routes';
 import styled from "styled-components";
-import BookTable from '../components/organisms/BookTable/BookTable';
-import BookForm from '../components/organisms/BookForm/BookForm';
-import About from '../templates/About';
-import Contact from '../templates/Contact';
+import BookTable from '../../components/organisms/BookTable/BookTable';
+import BookForm from '../../components/organisms/BookForm/BookForm';
+import About from './About';
+import Contact from './Contact';
 
-import { BooksContext } from '../context';
+import { BooksContext } from '../../context';
 
 const StyledWrapper = styled.div`
   width: 100%;

@@ -4,10 +4,10 @@ import { routes } from "../routes";
 import GlobalStyle from "../themes/GlobalStyle";
 import { ThemeProvider } from "styled-components";
 import { theme } from "../themes/mainTheme";
-import LoginPage from "../views/LoginPage";
+import LoginPage from "./admin/LoginPage";
 import { PageContext } from "../context";
-import MainTemplate from "../templates/MainTemplate";
-import AdminPage from './AdminPage';
+import MainTemplate from "../templates/user/MainTemplate";
+import AdminPage from './admin/AdminPage';
 
 const admin = {
   login: "admin",

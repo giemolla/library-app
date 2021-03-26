@@ -1,5 +1,6 @@
-import React, { Component } from "react";
+import React, { useState, useContext } from "react";
 import styled, { css } from "styled-components";
+import { BooksContext } from '../../../context';
 
 import Button from '../../atoms/Button/Button';
 import ButtonGroup from '../../molecules/ButtonGroup/ButtonGroup';
@@ -68,74 +69,65 @@ const DetailsWrapper = styled.div`
   margin: 20px 40px;
 `;
 
-class Book extends Component {
-  constructor(props) {
-    super(props);
+const Book = (props) => {
+  const [ showDetails, setShowDetails ] = useState(false);
+  const [ rating, setRating ] = useState(props.rating);
 
-    this.state = {
-      showDetails: false,
-      rating: this.props.rating
-    }
-
-    this.handleClick = this.handleClick.bind(this);
-    this.changeRating = this.changeRating.bind(this);
+  const handleClick = () => {
+    toggleDetails();
   }
 
-  handleClick() {
-    this.toggleDetails();
+  const toggleDetails = () => {
+    setShowDetails(!showDetails);
   }
 
-  toggleDetails() {
-    this.setState({ showDetails: !this.state.showDetails});
+  const changeRating = (rate) => {
+    setRating(rate);
   }
 
-  changeRating(rate) {
-    this.setState({ rating: rate });
-  }
+  const detailsButton =
+    !showDetails ? 
+      <Button onClick={handleClick}>Wiecej <i className="fas fa-chevron-down"></i></Button>
+      :
+      <Button onClick={handleClick}>Mniej <i className="fas fa-chevron-up"></i></Button>;
 
-  render() {
-    const detailsButton =
-      !this.state.showDetails ? 
-        <Button onClick={this.handleClick}>Wiecej <i className="fas fa-chevron-down"></i></Button>
-        :
-        <Button onClick={this.handleClick}>Mniej <i className="fas fa-chevron-up"></i></Button>;
-
-    return (
-      <>
-        <StyledListElement>
-          <StyledImage src={this.props.src} alt="img"/>
-          <StyledParagraph title="true">{this.props.title}</StyledParagraph>
-          <StyledParagraph author="true">{this.props.author}</StyledParagraph>
-          <StyledStarRating
-            rating={this.state.rating}
-            changeRating={this.changeRating}
-          />
-          <StyledButtonGroup>
-            <Button edit>
-              <i className="fas fa-edit"></i>
-            </Button>
-            <Button remove onClick={() => this.props.handleDelete(this.props.id)} >
-              <i className="fas fa-trash-alt"></i>
-            </Button>
-          </StyledButtonGroup>
-          {detailsButton}
-        </StyledListElement>
-        { this.state.showDetails &&
-          <DetailsWrapper>
-            <StyledParagraph><i className="fas fa-check"></i> {this.props.status}</StyledParagraph>
-            <StyledParagraph>{this.props.year}</StyledParagraph>
-            <StyledParagraph>{this.props.genre}</StyledParagraph>
-            <StyledParagraph>{this.props.description}</StyledParagraph>
-          </DetailsWrapper>
-        }
-      </>
-    );
-  }
+  return (
+    <>
+      <StyledListElement>
+        <StyledImage src={props.src} alt="img"/>
+        <StyledParagraph title="true">{props.title}</StyledParagraph>
+        <StyledParagraph author="true">{props.author}</StyledParagraph>
+        <StyledStarRating
+          rating={rating}
+          changeRating={changeRating}
+        />
+        <StyledButtonGroup>
+          <Button edit>
+            <i className="fas fa-edit"></i>
+          </Button>
+          <Button remove onClick={() => props.handleDelete(props.id)} >
+            <i className="fas fa-trash-alt"></i>
+          </Button>
+        </StyledButtonGroup>
+        {detailsButton}
+      </StyledListElement>
+      { showDetails &&
+        <DetailsWrapper>
+          <StyledParagraph><i className="fas fa-check"></i> {props.status}</StyledParagraph>
+          <StyledParagraph>{props.year}</StyledParagraph>
+          <StyledParagraph>{props.genre}</StyledParagraph>
+          <StyledParagraph>{props.description}</StyledParagraph>
+        </DetailsWrapper>
+      }
+    </>
+  );
 }
 
-class BookTable extends Component {
-  getBooks() {
-    return this.props.books.map(book => {
+const BookTable = (props) => {
+  const { books } = useContext(BooksContext);
+
+  const getBooks = () => {
+    return books.map(book => {
       const {
         id,
         image,
@@ -158,7 +150,7 @@ class BookTable extends Component {
           rating={rating}
           year={year}
           genre={genre}
-          handleDelete={this.props.handleDelete}
+          handleDelete={props.handleDelete}
           bookUrl={`/books/${id}`}
           description={description}
         />
@@ -166,16 +158,15 @@ class BookTable extends Component {
     });
   }
 
-  render() {
-    const bookList = this.getBooks();
-    return(
-      <StyledWrapper>
-        <StyledList>
-          {bookList}
-        </StyledList>
-      </StyledWrapper>
-    );
-  }
+  const bookList = getBooks();
+  return(
+    <StyledWrapper>
+      <StyledList>
+        {bookList}
+      </StyledList>
+    </StyledWrapper>
+  );
+
 }
 
 export default BookTable;

@@ -1,9 +1,9 @@
-export const getAllBooks = (context) => {
+export const getAllBooks = (stateSetter) => {
   const url = "http://localhost:3000/books";
   fetch(url)
     .then(resp => resp.json())
     .then(data => {
-      context.setState({ books: data });
+      stateSetter(data)
     });
 };
 

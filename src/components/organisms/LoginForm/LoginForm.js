@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Input from "../../atoms/Input/Input";
 import Button from "../../atoms/Button/Button";
@@ -35,56 +35,45 @@ const StyledButton = styled(Button)`
   }
 `;
 
-class LoginForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      login: "",
-      password: ""
-    };
+const LoginForm = (props) => {
+  const [ loginData, setLoginData ] = useState({ login: '', password: ''});
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-  }
-
-  handleInputChange(e) {
+  const handleInputChange = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
-    this.setState({
-      [name]: value
-    });
+    setLoginData({ ...loginData, [name]: value });
   }
 
-  handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    this.props.handleLogin(this.state.login, this.state.password);
+
+    const { login, password } = loginData;
+    props.handleLogin(login, password);
   }
 
-  render() {
-    return (
-      <StyledForm onSubmit={this.handleSubmit}>
-        <StyledHeading>
-          Welcome,<br></br>Almighty Admin!
-          <Paragraph>Please, confirm your secret identity...</Paragraph>
-        </StyledHeading>
-        <Input
-          type="text"
-          name="login"
-          placeholder="login"
-          value={this.state.login}
-          onChange={this.handleInputChange}
-        />
-        <Input
-          type="password"
-          name="password"
-          placeholder="password"
-          value={this.state.password}
-          onChange={this.handleInputChange}
-        />
-        <StyledButton>Log in</StyledButton>
-      </StyledForm>
-    );
-  }
+  return (
+    <StyledForm onSubmit={handleSubmit}>
+      <StyledHeading>
+        Welcome,<br></br>Almighty Admin!
+        <Paragraph>Please, confirm your secret identity...</Paragraph>
+      </StyledHeading>
+      <Input
+        type="text"
+        name="login"
+        placeholder="login"
+        value={loginData.login}
+        onChange={handleInputChange}
+      />
+      <Input
+        type="password"
+        name="password"
+        placeholder="password"
+        value={loginData.password}
+        onChange={handleInputChange}
+      />
+      <StyledButton>Log in</StyledButton>
+    </StyledForm>
+  );
 }
 
 export default LoginForm;

@@ -5,7 +5,7 @@ import GlobalStyle from "../themes/GlobalStyle";
 import { ThemeProvider } from "styled-components";
 import { theme } from "../themes/mainTheme";
 import LoginPage from "../views/LoginPage";
-import PageContext from "../context";
+import { PageContext } from "../context";
 import MainTemplate from "../templates/MainTemplate";
 import AdminPage from './AdminPage';
 

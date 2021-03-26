@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from 'styled-components';
 
 import Rating from "../../molecules/StarRating/StarRating";
@@ -6,6 +6,7 @@ import Button from '../../atoms/Button/Button';
 import Input from '../../atoms/Input/Input';
 import Label from '../../atoms/Label/Label';
 import Image from '../../atoms/Image/Image';
+import { BooksContext } from "../../../context";
 
 const StyledForm = styled.form`
   width: 80%;
@@ -138,6 +139,7 @@ const ImageLinkForm = () => {
 
 const BookForm = (props) => {
   const [ newBook, setNewBook ] = useState({ rating: 0, status: '' });
+  const { handleAdd } = useContext(BooksContext);
 
   const addImgLink = (e) => {
     e.preventDefault();
@@ -173,8 +175,7 @@ const BookForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(props)
-    props.handleSubmit(newBook);
+    handleAdd(newBook);
   };
 
   return (

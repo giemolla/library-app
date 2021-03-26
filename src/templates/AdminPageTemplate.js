@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useContext } from 'react';
 import { Route, Link } from 'react-router-dom';
 import { routes } from '../routes';
 import styled from "styled-components";
@@ -8,6 +8,7 @@ import About from '../templates/About';
 import Contact from '../templates/Contact';
 
 import * as bookService from '../services/bookService';
+import { BooksContext } from '../context';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -100,85 +101,17 @@ const NavList = (props) => {
   );
 };
 
-class AdminPageTemplate extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      books: [],
-    };
-
-    this.handleAdd = this.handleAdd.bind(this);
-    this.addBook = this.addBook.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
-    this.deleteBook = this.deleteBook.bind(this);
-    this.showForm = this.showForm.bind(this);
-  }
-
-  componentDidMount() {
-    bookService.getAllBooks(this);
-  }
-
-  handleAdd(data) {
-    const {
-      title,
-      author,
-      genre,
-      year,
-      status,
-      description,
-      link,
-      rating
-    } = data;
-    const newBook = {
-      title: title || "",
-      author: author || "",
-      genre: genre || "",
-      year: year || "",
-      status: status || "",
-      description: description || "",
-      image: link || "",
-      rating: rating || null,
-      thumbnail: "",
-      quotations: [],
-      quotationImages: [],
-      comments: "",
-      links: []
-    };
-
-    bookService.add(newBook, this.addBook);
-  }
-
-  addBook(data) {
-    this.setState({
-      books: this.state.books.concat(data)
-    });
-    console.log(this.state.books)
-  }
-
-  handleDelete(id) {
-    bookService.remove(id, this.deleteBook);
-  }
-
-  deleteBook(id) {
-    let refreshedBooks = this.state.books.filter(book => book.id !== id);
-    this.setState({
-      books: refreshedBooks
-    });
-  }
-
-  showForm() {
-    this.setState({ showForm: true });
-  }
+const AdminPageTemplate = (props) => {
+  const { handleDelete } = useContext(BooksContext);
    
-  render() {
-    return (
-      <StyledWrapper>
-        <FlexWrapper>
+  return (
+    <StyledWrapper>
+      <FlexWrapper>
 
-          <NavListWrapper>
-            <NavList routes={['Edycja ksiązek', 'Dodaj ksiązkę', 'Edycja o mnie', 'Edycja kontakt']}/>
-          </NavListWrapper>
-          
+        <NavListWrapper>
+          <NavList routes={['Edycja ksiązek', 'Dodaj ksiązkę', 'Edycja o mnie', 'Edycja kontakt']}/>
+        </NavListWrapper>
+
           <StyledDiv>
             <StyledHeader>Witaj Karolina!
               <StyledSpan><i className="fas fa-power-off"></i></StyledSpan>
@@ -186,19 +119,19 @@ class AdminPageTemplate extends Component {
               <Route
                 exact
                 path={routes.adminBooks}
-                render={props => <BookTable {...props} books={this.state.books} handleDelete={this.handleDelete}/>}
+                render={props => <BookTable {...props} handleDelete={handleDelete}/>}
               />
               <Route
                 path={routes.adminAddBook}
-                render={props => <BookForm {...props} handleSubmit={this.handleAdd}/>}
+                render={props => <BookForm {...props} />}
               />
             <Route path={routes.adminAbout} component={About} />
             <Route path={routes.adminContact} component={Contact} />
           </StyledDiv>
-        </FlexWrapper>
-      </StyledWrapper>
-    );
-  }
+
+      </FlexWrapper>
+    </StyledWrapper>
+  );
 }
 
 export default AdminPageTemplate;
